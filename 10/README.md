@@ -1,2 +1,2 @@
-# Relive DeBloat11
+# Relive DeBloat10
 Więcej szczegółów na stronie https://reliveteam.eu/relivedebloat/10
