@@ -108,7 +108,7 @@ exit
 :debloat
 
 :: Pobieranie debloatu
-powershell -Command "Invoke-WebRequest -Uri 'https://reliveteam.eu/relivedebloat11/debloat.exe' -OutFile '%temp%\debloat.exe'"
+powershell -Command "Invoke-WebRequest -Uri 'https://reliveteam.eu/relivedebloat/11/debloat.exe' -OutFile '%temp%\debloat.exe'"
 
 :: Uruchamianie debloatu
 start "" "%temp%\debloat.exe"
