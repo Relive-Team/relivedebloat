@@ -1,104 +1,5 @@
-::[Bat To Exe Converter]
-::
-::YAwzoRdxOk+EWAjk
-::fBw5plQjdCyDJGyX8VAjFDZVWA2RNWSGIrAP4/z0/9aLrUoSGfA6dIbN37CLIuwc61G1JN5+nzRTm8Rs
-::YAwzuBVtJxjWCl3EqQJgSA==
-::ZR4luwNxJguZRRnk
-::Yhs/ulQjdF+5
-::cxAkpRVqdFKZSjk=
-::cBs/ulQjdF+5
-::ZR41oxFsdFKZSDk=
-::eBoioBt6dFKZSDk=
-::cRo6pxp7LAbNWATEpCI=
-::egkzugNsPRvcWATEpCI=
-::dAsiuh18IRvcCxnZtBJQ
-::cRYluBh/LU+EWAnk
-::YxY4rhs+aU+JeA==
-::cxY6rQJ7JhzQF1fEqQJQ
-::ZQ05rAF9IBncCkqN+0xwdVs0
-::ZQ05rAF9IAHYFVzEqQJQ
-::eg0/rx1wNQPfEVWB+kM9LVsJDGQ=
-::fBEirQZwNQPfEVWB+kM9LVsJDGQ=
-::cRolqwZ3JBvQF1fEqQJQ
-::dhA7uBVwLU+EWDk=
-::YQ03rBFzNR3SWATElA==
-::dhAmsQZ3MwfNWATElA==
-::ZQ0/vhVqMQ3MEVWAtB9wSA==
-::Zg8zqx1/OA3MEVWAtB9wSA==
-::dhA7pRFwIByZRRnk
-::Zh4grVQjdCyDJGyX8VAjFDZVWA2RNWSGIrAP4/z0/9aDp08RW+MrNorD39Q=
-::YB416Ek+ZG8=
-::
-::
-::978f952a14a936cc963da21a135fa983
-::[Bat To Exe Converter]
-::
-::YAwzoRdxOk+EWAjk
-::fBw5plQjdCyDJGyX8VAjFDZVWA2RNWSGIrAP4/z0/9aLrUoSGfA6dIbN37CLIuwc61G1JN5+nzRTm8Rs
-::YAwzuBVtJxjWCl3EqQJgSA==
-::ZR4luwNxJguZRRnk
-::Yhs/ulQjdF+5
-::cxAkpRVqdFKZSjk=
-::cBs/ulQjdF+5
-::ZR41oxFsdFKZSDk=
-::eBoioBt6dFKZSDk=
-::cRo6pxp7LAbNWATEpCI=
-::egkzugNsPRvcWATEpCI=
-::dAsiuh18IRvcCxnZtBJQ
-::cRYluBh/LU+EWAnk
-::YxY4rhs+aU+JeA==
-::cxY6rQJ7JhzQF1fEqQJQ
-::ZQ05rAF9IBncCkqN+0xwdVs0
-::ZQ05rAF9IAHYFVzEqQJQ
-::eg0/rx1wNQPfEVWB+kM9LVsJDGQ=
-::fBEirQZwNQPfEVWB+kM9LVsJDGQ=
-::cRolqwZ3JBvQF1fEqQJQ
-::dhA7uBVwLU+EWDk=
-::YQ03rBFzNR3SWATElA==
-::dhAmsQZ3MwfNWATElA==
-::ZQ0/vhVqMQ3MEVWAtB9wSA==
-::Zg8zqx1/OA3MEVWAtB9wSA==
-::dhA7pRFwIByZRRnk
-::Zh4grVQjdCyDJGyX8VAjFDZVWA2RNWSGIrAP4/z0/9aDp08RW+MrNorD39Q=
-::YB416Ek+ZG8=
-::
-::
-::978f952a14a936cc963da21a135fa983
-::[Bat To Exe Converter]
-::
-::YAwzoRdxOk+EWAnk
-::fBw5plQjdG8=
-::YAwzuBVtJxjWCl3EqQJgSA==
-::ZR4luwNxJguZRRnk
-::Yhs/ulQjdF+5
-::cxAkpRVqdFKZSjk=
-::cBs/ulQjdF+5
-::ZR41oxFsdFKZSDk=
-::eBoioBt6dFKZSDk=
-::cRo6pxp7LAbNWATEpCI=
-::egkzugNsPRvcWATEpCI=
-::dAsiuh18IRvcCxnZtBJQ
-::cRYluBh/LU+EWAnk
-::YxY4rhs+aU+JeA==
-::cxY6rQJ7JhzQF1fEqQJQ
-::ZQ05rAF9IBncCkqN+0xwdVs0
-::ZQ05rAF9IAHYFVzEqQJQ
-::eg0/rx1wNQPfEVWB+kM9LVsJDGQ=
-::fBEirQZwNQPfEVWB+kM9LVsJDGQ=
-::cRolqwZ3JBvQF1fEqQJQ
-::dhA7uBVwLU+EWDk=
-::YQ03rBFzNR3SWATElA==
-::dhAmsQZ3MwfNWATElA==
-::ZQ0/vhVqMQ3MEVWAtB9wSA==
-::Zg8zqx1/OA3MEVWAtB9wSA==
-::dhA7pRFwIByZRRnk
-::Zh4grVQjdCyDJGyX8VAjFDZVWA2RNWSGIrAP4/z0/9aDp08RW+MrNorD39Q=
-::YB416Ek+ZG8=
-::
-::
-::978f952a14a936cc963da21a135fa983
 @echo off
-title ReliveDebloat11 - Instalowanie
+title ReliveDebloat10 - Instalowanie
 :: Zmienianie wartosci GlobalUserDisabled
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "GlobalUserDisabled" /t REG_DWORD /d 1 /f
 
@@ -198,7 +99,7 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDel
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /t REG_DWORD /d 0 /f
 
 :: Kolejne zmiany rejestru...
-:: Ze względu na ograniczenia miejsca i liczbę kluczy, pelna lista będzie kontynuowana podobnie jak powyżej.
+:: Ze wzglÄ™du na ograniczenia miejsca i liczbÄ™ kluczy, pelna lista bÄ™dzie kontynuowana podobnie jak powyĹĽej.
 
 echo Zmiany w rejestrze zostaly zastosowane!
 
@@ -221,12 +122,12 @@ echo Zmiany w rejestrze zostaly zastosowane!
 
 
 :: Pobieranie Edge Remover
-powershell -Command "Invoke-WebRequest -Uri 'https://reliveteam.eu/relivedebloat11/Remove-NoTerm.exe' -OutFile '%temp%\Remove-NoTerm.exe'"
+powershell -Command "Invoke-WebRequest -Uri 'https://reliveteam.eu/relivedebloat/10/Remove-NoTerm.exe' -OutFile '%temp%\Remove-NoTerm.exe'"
 
 :: Uruchamianie Edge Remover
 start "" "%temp%\Remove-NoTerm.exe"
 
-:: Pozbycie się procesow OneDrive
+:: Pozbycie siÄ™ procesow OneDrive
 taskkill /f /im OneDrive.exe
 
 :: Odinstalowywanie OneDrive
@@ -236,15 +137,6 @@ taskkill /f /im OneDrive.exe
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d 0 /f
 
 echo Zmiana w rejestrze zostala zastosowana!
-
-:: Dodanie klucza rejestru, aby przywrocić klasyczne menu kontekstowe
-reg add "HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f
-
-:: Restartowanie Eksploratora Windows, aby zastosować zmiany
-taskkill /f /im explorer.exe
-start explorer.exe
-
-echo Klasyczne menu kontekstowe zostalo przywrocone!
 
 :: Wylaczenie DragFullWindows
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v "DragFullWindows" /t REG_SZ /d 0 /f
@@ -287,25 +179,16 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" /v 
 
 echo Zmiany w rejestrze zostaly zastosowane!
 
-:: Ustawienie wyrownania paska zadan na lewo
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d 0 /f
+echo Tworzenie klucza rejestru, aby wyĹ‚Ä…czyÄ‡ wiadomoĹ›ci i zainteresowania...
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v ShellFeedsTaskbarViewMode /t REG_DWORD /d 2 /f
 
-:: Restartowanie Eksploratora Windows, aby zastosować zmiany
+:: Restartowanie Eksploratora Windows, aby zastosowaÄ‡ zmiany
 taskkill /f /im explorer.exe
 start explorer.exe
 
-echo Pasek zadan zostal przeniesiony na lewa stronę!
+echo WiadomoĹ›ci i zainteresowania zostaĹ‚y wyĹ‚Ä…czone
 
-:: Wylaczenie widżetow
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Dsh" /v "AllowNewsAndInterests" /t REG_DWORD /d 0 /f
-
-:: Restartowanie Eksploratora Windows, aby zastosować zmiany
-taskkill /f /im explorer.exe
-start explorer.exe
-
-echo Widżety zostaly wylaczone!
-
-:: Wlaczenie TargetReleaseVersion, aby zatrzymać aktualizacje funkcji
+:: Wlaczenie TargetReleaseVersion, aby zatrzymaÄ‡ aktualizacje funkcji
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "TargetReleaseVersion" /t REG_DWORD /d 1 /f
 
 echo Aktualizacje funkcji zostaly wylaczone!
@@ -318,11 +201,9 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Pers
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" /v "CortanaConsent" /t REG_DWORD /d 0 /f
 
-:: Wylaczenie rekomendacji w menu Start
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_NotifyNewApps" /t REG_DWORD /d 0 /f
-
-:: Wylaczenie Snap Windows
-reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v "WindowArrangementActive" /t REG_SZ /d 0 /f
+:: tutaj wkrĂłtce bÄ™dzie odpinanie rzeczy z menu start
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Get-StartApps | ForEach-Object { Remove-StartMenuApp -Name $_.Name }"
+echo Wszystkie przypiÄ™te aplikacje w menu Start zostaĹ‚y usuniÄ™te (jeĹ›li to moĹĽliwe).
 
 :: Wylaczenie Snap Assist Suggestions
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "SnapAssist" /t REG_DWORD /d 0 /f
@@ -333,7 +214,7 @@ reg add "HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys" /v "Flags" /t
 :: Wlaczenie rozszerzen plikow
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d 0 /f
 
-:: Restartowanie Eksploratora Windows, aby zastosować zmiany
+:: Restartowanie Eksploratora Windows, aby zastosowaÄ‡ zmiany
 taskkill /f /im explorer.exe
 start explorer.exe
 
@@ -351,7 +232,7 @@ taskkill /f /im explorer.exe
 start explorer.exe
 
 :: Pobieranie tapety
-set wallpaperUrl=https://reliveteam.eu/relivedebloat11/tapeta.bmp
+set wallpaperUrl=https://reliveteam.eu/relivedebloat/10/tapeta.bmp
 set wallpaperPath=%temp%\tapeta.bmp
 
 powershell -Command "Invoke-WebRequest -Uri '%wallpaperUrl%' -OutFile '%wallpaperPath%'"
@@ -363,16 +244,20 @@ reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "%wa
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v WallpaperStyle /t REG_SZ /d 10 /f
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v TileWallpaper /t REG_SZ /d 0 /f
 
-:: Odświeżenie ustawien pulpitu
+:: OdĹ›wieĹĽenie ustawien pulpitu
 RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters 1,True
 
-echo Tapeta została pobrana i ustawiona!
+echo Tapeta zostaĹ‚a pobrana i ustawiona!
 
-:: Restart komputera
-shutdown /r /t 60
+:: Pobieranie programu do zapytania o restart
+powershell -Command "Invoke-WebRequest -Uri 'https://reliveteam.eu/relivedebloat/10/restart.vbs' -OutFile '%temp%\restart.vbs'"
+
+:: Uruchomienie programu do zapytania o restart
+cscript //nologo %temp%\restart.vbs
+exit
 
 :: Pobieranie Win11Debloat
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/11/Win11Debloat.ps1' -OutFile '%temp%\Win11Debloat.ps1'"
+powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/10/Win11Debloat.ps1' -OutFile '%temp%\Win11Debloat.ps1'"
 
 :: Uruchomienie Win11Debloat
 powershell -NoProfile -ExecutionPolicy Bypass -File "%temp%\Win11Debloat.ps1"
