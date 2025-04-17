@@ -107,7 +107,7 @@ for browser_name, data in BROWSERS.items():
     create_icon_button(frame, browser_name, data["icon"])
 
 # ====== Przycisk "Pomiń" ======
-skip_btn = tk.Button(root, text="Pomiń", font=("Arial", 18), command=skip_browser_install, fg="black", bg="white", bd=0, padx=20, pady=10, activebackground="#cccccc")
+skip_btn = tk.Button(root, text="Pomiń", font=("Arial", 18), command=skip_browser_install, fg="white", bg="black", bd=0, padx=20, pady=10, activebackground="#cccccc")
 skip_btn.bind("<Enter>", on_enter)
 skip_btn.bind("<Leave>", on_leave)
 skip_btn.pack(pady=40)
