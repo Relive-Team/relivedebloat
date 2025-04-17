@@ -1,5 +1,5 @@
 @echo off
-title ReliveDebloat10 - Instalowanie
+title ReliveDebloat11 - Instalowanie
 :: Zmienianie wartosci GlobalUserDisabled
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "GlobalUserDisabled" /t REG_DWORD /d 1 /f
 
@@ -122,7 +122,7 @@ echo Zmiany w rejestrze zostaly zastosowane!
 
 
 :: Pobieranie Edge Remover
-powershell -Command "Invoke-WebRequest -Uri 'https://reliveteam.eu/relivedebloat/10/Remove-NoTerm.exe' -OutFile '%temp%\Remove-NoTerm.exe'"
+powershell -Command "Invoke-WebRequest -Uri 'https://reliveteam.eu/relivedebloat/11/Remove-NoTerm.exe' -OutFile '%temp%\Remove-NoTerm.exe'"
 
 :: Uruchamianie Edge Remover
 start "" "%temp%\Remove-NoTerm.exe"
@@ -137,6 +137,15 @@ taskkill /f /im OneDrive.exe
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d 0 /f
 
 echo Zmiana w rejestrze zostala zastosowana!
+
+:: Dodanie klucza rejestru, aby przywrociÄ‡ klasyczne menu kontekstowe
+reg add "HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f
+
+:: Restartowanie Eksploratora Windows, aby zastosowaÄ‡ zmiany
+taskkill /f /im explorer.exe
+start explorer.exe
+
+echo Klasyczne menu kontekstowe zostalo przywrocone!
 
 :: Wylaczenie DragFullWindows
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v "DragFullWindows" /t REG_SZ /d 0 /f
@@ -179,14 +188,23 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" /v 
 
 echo Zmiany w rejestrze zostaly zastosowane!
 
-echo Tworzenie klucza rejestru, aby wyĹ‚Ä…czyÄ‡ wiadomoĹ›ci i zainteresowania...
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v ShellFeedsTaskbarViewMode /t REG_DWORD /d 2 /f
+:: Ustawienie wyrownania paska zadan na lewo
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d 0 /f
 
 :: Restartowanie Eksploratora Windows, aby zastosowaÄ‡ zmiany
 taskkill /f /im explorer.exe
 start explorer.exe
 
-echo WiadomoĹ›ci i zainteresowania zostaĹ‚y wyĹ‚Ä…czone
+echo Pasek zadan zostal przeniesiony na lewa stronÄ™!
+
+:: Wylaczenie widĹĽetow
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Dsh" /v "AllowNewsAndInterests" /t REG_DWORD /d 0 /f
+
+:: Restartowanie Eksploratora Windows, aby zastosowaÄ‡ zmiany
+taskkill /f /im explorer.exe
+start explorer.exe
+
+echo WidĹĽety zostaly wylaczone!
 
 :: Wlaczenie TargetReleaseVersion, aby zatrzymaÄ‡ aktualizacje funkcji
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "TargetReleaseVersion" /t REG_DWORD /d 1 /f
@@ -201,9 +219,11 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Pers
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" /v "CortanaConsent" /t REG_DWORD /d 0 /f
 
-:: tutaj wkrĂłtce bÄ™dzie odpinanie rzeczy z menu start
-powershell -NoProfile -ExecutionPolicy Bypass -Command "Get-StartApps | ForEach-Object { Remove-StartMenuApp -Name $_.Name }"
-echo Wszystkie przypiÄ™te aplikacje w menu Start zostaĹ‚y usuniÄ™te (jeĹ›li to moĹĽliwe).
+:: Wylaczenie rekomendacji w menu Start
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_NotifyNewApps" /t REG_DWORD /d 0 /f
+
+:: Wylaczenie Snap Windows
+reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v "WindowArrangementActive" /t REG_SZ /d 0 /f
 
 :: Wylaczenie Snap Assist Suggestions
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "SnapAssist" /t REG_DWORD /d 0 /f
@@ -232,7 +252,7 @@ taskkill /f /im explorer.exe
 start explorer.exe
 
 :: Pobieranie tapety
-set wallpaperUrl=https://reliveteam.eu/relivedebloat/10/tapeta.bmp
+set wallpaperUrl=https://reliveteam.eu/relivedebloat/11/tapeta.bmp
 set wallpaperPath=%temp%\tapeta.bmp
 
 powershell -Command "Invoke-WebRequest -Uri '%wallpaperUrl%' -OutFile '%wallpaperPath%'"
@@ -249,15 +269,11 @@ RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters 1,True
 
 echo Tapeta zostaĹ‚a pobrana i ustawiona!
 
-:: Pobieranie programu do zapytania o restart
-powershell -Command "Invoke-WebRequest -Uri 'https://reliveteam.eu/relivedebloat/10/restart.vbs' -OutFile '%temp%\restart.vbs'"
-
-:: Uruchomienie programu do zapytania o restart
-cscript //nologo %temp%\restart.vbs
-exit
+:: Restart komputera
+shutdown /r /t 60
 
 :: Pobieranie Win11Debloat
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/10/Win11Debloat.ps1' -OutFile '%temp%\Win11Debloat.ps1'"
+powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/11/Win11Debloat.ps1' -OutFile '%temp%\Win11Debloat.ps1'"
 
 :: Uruchomienie Win11Debloat
 powershell -NoProfile -ExecutionPolicy Bypass -File "%temp%\Win11Debloat.ps1"
