@@ -1,3 +1,4 @@
+@echo off
 echo Wybrales Google Chrome
 
 :: Pobieranie instalatora Chroma
