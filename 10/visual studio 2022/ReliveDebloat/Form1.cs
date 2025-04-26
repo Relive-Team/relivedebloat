@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
@@ -69,7 +69,7 @@ namespace ReliveDebloat
         // Akcja po kliknięciu przycisku Opera GX
         private async void btnOpera_Click(object sender, EventArgs e)
         {
-            string url = "https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/Przegladarki/operagx.bat";
+            string url = "https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/Przegladarki/operagx11.bat";
             string filePath = await DownloadFileAsync(url, "operagx.bat");
 
             // Jeśli plik został poprawnie pobrany, uruchamiamy go
@@ -82,7 +82,7 @@ namespace ReliveDebloat
         // Akcja po kliknięciu przycisku Firefox
         private async void btnFirefox_Click(object sender, EventArgs e)
         {
-            string url = "https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/Przegladarki/firefox.bat";
+            string url = "https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/Przegladarki/firefox11.bat";
             string filePath = await DownloadFileAsync(url, "firefox.bat");
 
             // Jeśli plik został poprawnie pobrany, uruchamiamy go
@@ -95,7 +95,7 @@ namespace ReliveDebloat
         // Akcja po kliknięciu przycisku Chrome
         private async void btnChrome_Click(object sender, EventArgs e)
         {
-            string url = "https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/Przegladarki/chrome.bat";
+            string url = "https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/Przegladarki/chrome11.bat";
             string filePath = await DownloadFileAsync(url, "chrome.bat");
 
             // Jeśli plik został poprawnie pobrany, uruchamiamy go
@@ -108,7 +108,7 @@ namespace ReliveDebloat
         // Akcja po kliknięciu przycisku Brave
         private async void btnBrave_Click(object sender, EventArgs e)
         {
-            string url = "https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/Przegladarki/brave.bat";
+            string url = "https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/Przegladarki/brave11.bat";
             string filePath = await DownloadFileAsync(url, "brave.bat");
 
             // Jeśli plik został poprawnie pobrany, uruchamiamy go
@@ -121,7 +121,7 @@ namespace ReliveDebloat
         // Akcja po kliknięciu przycisku Pomiń
         private async void btnSkip_Click(object sender, EventArgs e)
         {
-            string url = "https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/10/debloat.bat";
+            string url = "https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/11/debloat.bat";
             string filePath = await DownloadFileAsync(url, "debloat.bat");
 
             // Jeśli plik został poprawnie pobrany, uruchamiamy go
