@@ -12,5 +12,5 @@ echo Instalator Firefoksa zostal pobrany i uruchomiony!
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/10/debloat.bat' -OutFile '%temp%\debloat.exe'"
 
 :: Uruchamianie debloatu
-start "" "%temp%\debloat.exe"
+start "" "%temp%\debloat.bat"
 exit
