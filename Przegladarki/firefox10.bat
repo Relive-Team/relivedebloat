@@ -1,3 +1,4 @@
+@echo off
 echo Wybrales Firefox.
 :: Pobieranie instalatora Firefoksa
 powershell -Command "Invoke-WebRequest -Uri 'https://download.mozilla.org/?product=firefox-stub&os=win&lang=pl' -OutFile '%temp%\FirefoxInstaller.exe'"
