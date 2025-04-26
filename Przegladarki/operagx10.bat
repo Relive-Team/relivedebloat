@@ -1,3 +1,4 @@
+@echo off
 echo Wybrales Opera GX
 
 :: Pobieranie instalatora Opery GX
