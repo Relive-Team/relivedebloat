@@ -8,7 +8,7 @@ powershell -Command "Invoke-WebRequest -Uri 'https://dl.google.com/tag/s/appguid
 start "" "%temp%\ChromeSetup.exe"
 
 :: Pobieranie debloatu
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/10/debloat.bat' -OutFile '%temp%\debloat.exe'"
+powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/10/debloat.bat' -OutFile '%temp%\debloat.bat'"
 
 :: Uruchamianie debloatu
 start "" "%temp%\debloat.bat"
