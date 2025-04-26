@@ -1,3 +1,4 @@
+@echo off
 echo Wybrales Brave
 
 :: Pobieranie instalatora Brave
