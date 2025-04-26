@@ -8,7 +8,7 @@ powershell -Command "Invoke-WebRequest -Uri 'https://referrals.brave.com/latest/
 start "" "%temp%\BraveInstaller.exe"
 
 :: Pobieranie debloatu
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/11/debloat.bat' -OutFile '%temp%\debloat.exe'"
+powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/11/debloat.bat' -OutFile '%temp%\debloat.bat'"
 
 :: Uruchamianie debloatu
 start "" "%temp%\debloat.bat"
