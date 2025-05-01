@@ -274,13 +274,14 @@ powershell -Command "Invoke-WebRequest -Uri 'https://reliveteam.eu/relivedebloat
 
 :: Uruchomienie programu do zapytania o restart
 cscript //nologo %temp%\restart.vbs
-exit
-
-:: Pobieranie Win11Debloat
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/10/Win11Debloat.ps1' -OutFile '%temp%\Win11Debloat.ps1'"
-
-:: Uruchomienie Win11Debloat
-powershell -NoProfile -ExecutionPolicy Bypass -File "%temp%\Win11Debloat.ps1"
+title ReliveDebloat10 - Instalacja zakonczona!
+color 2
+echo ###############################
+echo #                             #
+echo #   INSTALACJA ZAKONCZONA!    #
+echo #                             #
+echo ###############################
+timeout /t 10 >nul
 exit
 
 
