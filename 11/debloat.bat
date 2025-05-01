@@ -294,16 +294,6 @@ powershell -Command "Invoke-WebRequest -Uri 'https://reliveteam.eu/relivedebloat
 
 :: Uruchomienie programu do zapytania o restart
 cscript //nologo %temp%\restart.vbs
-timeout /t 1 >nul
-color 4
-echo #################################
-echo #                               #
-echo #   UWAGA! ZRÓB RESTART         #
-echo # PO ZNIKNĘCIU WSZYSTKICH OKIEN #
-echo #  (OPRÓCZ OKNA Z RESTARTEM     #      
-echo #                               #
-echo #################################
-timeout /t 20 >nul
 
 :: Pobieranie Win11Debloat
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/11/Win11Debloat.ps1' -OutFile '%temp%\Win11Debloat.ps1'"
