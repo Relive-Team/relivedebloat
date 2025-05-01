@@ -1,5 +1,25 @@
 @echo off
+title ReliveDebloat10
+:: Odliczanie
+echo 5...
+timeout /t 1 >nul
+echo 4...
+timeout /t 1 >nul
+echo 3...
+timeout /t 1 >nul
+echo 2...
+timeout /t 1 >nul
+echo 1...
+timeout /t 1 >nul
+color 2
+echo ###############################
+echo #                             #
+echo #   ZACZYNAM INSTALOWANIE!    #
+echo #                             #
+echo ###############################
+timeout /t 1 >nul
 title ReliveDebloat10 - Instalowanie
+color 07
 :: Zmienianie wartosci GlobalUserDisabled
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "GlobalUserDisabled" /t REG_DWORD /d 1 /f
 
@@ -232,7 +252,7 @@ taskkill /f /im explorer.exe
 start explorer.exe
 
 :: Pobieranie tapety
-set wallpaperUrl=https://reliveteam.eu/relivedebloat/10/tapeta.bmp
+set wallpaperUrl=https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/Tapety/tapeta.bmp
 set wallpaperPath=%temp%\tapeta.bmp
 
 powershell -Command "Invoke-WebRequest -Uri '%wallpaperUrl%' -OutFile '%wallpaperPath%'"
