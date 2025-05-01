@@ -294,8 +294,6 @@ powershell -Command "Invoke-WebRequest -Uri 'https://reliveteam.eu/relivedebloat
 
 :: Uruchomienie programu do zapytania o restart
 cscript //nologo %temp%\restart.vbs
-exit
-
 timeout /t 1 >nul
 color 4
 echo #################################
