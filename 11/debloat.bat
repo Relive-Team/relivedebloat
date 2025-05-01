@@ -1,5 +1,25 @@
 @echo off
+title ReliveDebloat11
+:: Odliczanie
+echo 5...
+timeout /t 1 >nul
+echo 4...
+timeout /t 1 >nul
+echo 3...
+timeout /t 1 >nul
+echo 2...
+timeout /t 1 >nul
+echo 1...
+timeout /t 1 >nul
+color 2
+echo ###############################
+echo #                             #
+echo #   ZACZYNAM INSTALOWANIE!    #
+echo #                             #
+echo ###############################
+timeout /t 1 >nul
 title ReliveDebloat11 - Instalowanie
+color 07
 :: Zmienianie wartosci GlobalUserDisabled
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "GlobalUserDisabled" /t REG_DWORD /d 1 /f
 
@@ -269,8 +289,23 @@ RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters 1,True
 
 echo Tapeta zostaĹ‚a pobrana i ustawiona!
 
-:: Restart komputera
-shutdown /r /t 60
+:: Pobieranie programu do zapytania o restart
+powershell -Command "Invoke-WebRequest -Uri 'https://reliveteam.eu/relivedebloat/10/restart.vbs' -OutFile '%temp%\restart.vbs'"
+
+:: Uruchomienie programu do zapytania o restart
+cscript //nologo %temp%\restart.vbs
+exit
+
+timeout /t 1 >nul
+color 4
+echo #################################
+echo #                               #
+echo #   UWAGA! ZRÓB RESTART         #
+echo # PO ZNIKNĘCIU WSZYSTKICH OKIEN #
+echo #  (OPRÓCZ OKNA Z RESTARTEM     #      
+echo #                               #
+echo #################################
+timeout /t 20 >nul
 
 :: Pobieranie Win11Debloat
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/11/Win11Debloat.ps1' -OutFile '%temp%\Win11Debloat.ps1'"
