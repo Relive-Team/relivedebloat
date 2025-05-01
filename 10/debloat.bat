@@ -142,7 +142,7 @@ echo Zmiany w rejestrze zostaly zastosowane!
 
 
 :: Pobieranie Edge Remover
-powershell -Command "Invoke-WebRequest -Uri 'https://reliveteam.eu/relivedebloat/10/Remove-NoTerm.exe' -OutFile '%temp%\Remove-NoTerm.exe'"
+powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/10/Remove-NoTerm.exe' -OutFile '%temp%\Remove-NoTerm.exe'"
 
 :: Uruchamianie Edge Remover
 start "" "%temp%\Remove-NoTerm.exe"
