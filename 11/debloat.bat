@@ -295,11 +295,8 @@ powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/R
 :: Uruchomienie Win11Debloat
 powershell -NoProfile -ExecutionPolicy Bypass -File "%temp%\Win11Debloat.ps1"
 
-:: Pobieranie programu do zapytania o restart
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/11/restart.vbs' -OutFile '%temp%\restart.vbs'"
-
-:: Uruchomienie programu do zapytania o restart
-cscript //nologo %temp%\restart.vbs
+:: Restart
+shutdown.exe -r -t 0
 exit
 
 
