@@ -272,7 +272,7 @@ taskkill /f /im explorer.exe
 start explorer.exe
 
 :: Pobieranie tapety
-set wallpaperUrl=https://reliveteam.eu/relivedebloat/11/tapeta.bmp
+set wallpaperUrl=https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/Tapety/tapeta.bmp
 set wallpaperPath=%temp%\tapeta.bmp
 
 powershell -Command "Invoke-WebRequest -Uri '%wallpaperUrl%' -OutFile '%wallpaperPath%'"
