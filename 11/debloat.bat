@@ -290,7 +290,7 @@ RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters 1,True
 echo Tapeta zostaĹ‚a pobrana i ustawiona!
 
 :: Pobieranie programu do zapytania o restart
-powershell -Command "Invoke-WebRequest -Uri 'https://reliveteam.eu/relivedebloat/10/restart.vbs' -OutFile '%temp%\restart.vbs'"
+powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/11/restart.vbs' -OutFile '%temp%\restart.vbs'"
 
 :: Uruchomienie programu do zapytania o restart
 cscript //nologo %temp%\restart.vbs
