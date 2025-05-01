@@ -1,11 +1,11 @@
 ' restart_system.vbs
 
 ' Pokazuje ostrzeżenie
-MsgBox "UWAGA! Zrób restart dopiero po tym jak znikną wszystkie okna oprócz tego", vbExclamation, "Ostrzeżenie"
+MsgBox "UWAGA! Zrob restart dopiero po tym jak znikna wszystkie okna oprocz tego", vbExclamation, "Ostrzeżenie"
 
-' Pyta użytkownika, czy zrestartować system
+' Pyta użytkownika, czy zrestartowac system
 Dim response
-response = MsgBox("Czy restartować system? (zalecane)", vbYesNo + vbQuestion, "Restart systemu")
+response = MsgBox("Czy restartowac system? (zalecane)", vbYesNo + vbQuestion, "Restart systemu")
 
 If response = vbYes Then
     ' Jeżeli użytkownik wybierze "Tak", restartuje system
