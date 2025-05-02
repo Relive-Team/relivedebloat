@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
@@ -18,15 +18,13 @@ namespace ReliveDebloat
 
             // Wyłączenie zmiany rozmiaru okna
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
-
-            // Wyłączenie przycisku maksymalizacji
             this.MaximizeBox = false;
-
-            // Opcjonalnie: Wyłączenie przycisku minimalizacji
             this.MinimizeBox = false;
-
-            // Ustawienie stałego rozmiaru okna
             this.Size = new System.Drawing.Size(800, 600);  // Możesz zmienić wymiary w razie potrzeby
+
+            // Zmiana tekstu przycisku Chrome i jego dezaktywacja
+            btnChrome.Text = "Chrome - niedostępny";
+            btnChrome.Enabled = false;
 
             // Dodanie labela do wyświetlania komunikatów
             statusLabel = new Label();
@@ -34,7 +32,7 @@ namespace ReliveDebloat
             statusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             statusLabel.ForeColor = System.Drawing.Color.White;
             statusLabel.Font = new System.Drawing.Font("Segoe UI", 14, System.Drawing.FontStyle.Bold);
-            statusLabel.BackColor = System.Drawing.Color.FromArgb(30, 30, 30); // Ciemne tło
+            statusLabel.BackColor = System.Drawing.Color.FromArgb(30, 30, 30);
             statusLabel.Text = "Wybierz przeglądarkę, aby rozpocząć proces...";
             this.Controls.Add(statusLabel);
         }
@@ -44,19 +42,13 @@ namespace ReliveDebloat
         {
             try
             {
-                // Pokazujemy komunikat o rozpoczęciu pobierania
                 statusLabel.Text = "Pobieranie pliku...";
 
                 using (HttpClient client = new HttpClient())
                 {
-                    // Pobieramy plik
                     byte[] fileBytes = await client.GetByteArrayAsync(url);
-
-                    // Określamy ścieżkę do folderu %temp% i zapisywanie pliku
                     string tempFolderPath = Path.GetTempPath();
                     string filePath = Path.Combine(tempFolderPath, fileName);
-
-                    // Zapisujemy plik na dysku
                     File.WriteAllBytes(filePath, fileBytes);
 
                     statusLabel.Text = $"Plik {fileName} został pobrany.";
@@ -77,11 +69,8 @@ namespace ReliveDebloat
             try
             {
                 statusLabel.Text = "Uruchamianie procesu...";
-
-                Process.Start(filePath); // Uruchamiamy plik .bat
+                Process.Start(filePath);
                 statusLabel.Text = "Proces uruchomiony pomyślnie.";
-
-                // Zamknięcie okna po uruchomieniu .bat
                 this.Close();
             }
             catch (Exception ex)
@@ -97,7 +86,6 @@ namespace ReliveDebloat
             string url = "https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/Przegladarki/operagx10.bat";
             string filePath = await DownloadFileAsync(url, "operagx.bat");
 
-            // Jeśli plik został poprawnie pobrany, uruchamiamy go
             if (filePath != null)
             {
                 RunBatchFile(filePath);
@@ -110,20 +98,6 @@ namespace ReliveDebloat
             string url = "https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/Przegladarki/firefox10.bat";
             string filePath = await DownloadFileAsync(url, "firefox.bat");
 
-            // Jeśli plik został poprawnie pobrany, uruchamiamy go
-            if (filePath != null)
-            {
-                RunBatchFile(filePath);
-            }
-        }
-
-        // Akcja po kliknięciu przycisku Chrome
-        private async void btnChrome_Click(object sender, EventArgs e)
-        {
-            string url = "https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/Przegladarki/chrome10.bat";
-            string filePath = await DownloadFileAsync(url, "chrome.bat");
-
-            // Jeśli plik został poprawnie pobrany, uruchamiamy go
             if (filePath != null)
             {
                 RunBatchFile(filePath);
@@ -136,7 +110,6 @@ namespace ReliveDebloat
             string url = "https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/Przegladarki/brave10.bat";
             string filePath = await DownloadFileAsync(url, "brave.bat");
 
-            // Jeśli plik został poprawnie pobrany, uruchamiamy go
             if (filePath != null)
             {
                 RunBatchFile(filePath);
@@ -149,11 +122,16 @@ namespace ReliveDebloat
             string url = "https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/10/debloat.bat";
             string filePath = await DownloadFileAsync(url, "debloat.bat");
 
-            // Jeśli plik został poprawnie pobrany, uruchamiamy go
             if (filePath != null)
             {
                 RunBatchFile(filePath);
             }
+        }
+
+        // Chrome - niedostępny, ale funkcja zostaje (opcjonalnie)
+        private async void btnChrome_Click(object sender, EventArgs e)
+        {
+            // Nieaktywny – nie będzie wywołane, jeśli btnChrome.Enabled = false
         }
     }
 }
