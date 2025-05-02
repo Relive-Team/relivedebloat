@@ -1,5 +1,5 @@
 @echo off
-title ReliveDebloat11 - Instalacja Chrome
+title ReliveDebloat10 - Instalacja Chrome
 echo Instalacja Google Chrome za pomoca winget...
 REM Sprawdzenie, czy winget jest dostepny
 where winget >nul 2>&1
