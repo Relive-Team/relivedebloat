@@ -1,16 +1,6 @@
 @echo off
 title ReliveDebloat10 - Instalacja Chrome
-echo Instalacja Google Chrome za pomoca winget...
-REM Sprawdzenie, czy winget jest dostepny
-where winget >nul 2>&1
-if errorlevel 1 (
-    echo Winget nie jest dostepny na tym systemie. Upewnij sie, ze masz Windows 10 2004 lub nowszy oraz zaktualizowany App Installer.
-    pause
-    exit /b 1
-)
-
-REM Instalacja Google Chrome
-winget install --id=Google.Chrome --exact --accept-source-agreements --accept-package-agreements
-
-echo Instalacja zakonczona.
+echo Opcja Chrome jest tymczasowo niedostępna.
+echo Kliknij dowolny klawisz, aby zamknac komunikat
+pause
 exit
