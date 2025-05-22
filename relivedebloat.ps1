@@ -20,10 +20,19 @@ Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
 function Get-WindowsVersion {
-    $version = (Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion").ProductName
-    if ($version -like "*Windows 11*") { return "Windows 11" }
-    elseif ($version -like "*Windows 10*") { return "Windows 10" }
-    else { return "Inny lub nieznany system" }
+    $regPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion"
+    try {
+        $build = (Get-ItemProperty -Path $regPath).CurrentBuild
+        if ([int]$build -ge 22000) {
+            return "Windows 11"
+        } elseif ([int]$build -lt 22000) {
+            return "Windows 10"
+        } else {
+            return "Inny lub nieznany system"
+        }
+    } catch {
+        return "Nie udało się odczytać wersji"
+    }
 }
 
 function Download-AndRunScript {
