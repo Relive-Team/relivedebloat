@@ -1,7 +1,7 @@
 ﻿Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-# Definicja klasy do komunikacji z HTML/JS
+# Klasa C# poprawiona: bez lambd, z jawnie określonym typem void
 Add-Type -TypeDefinition @"
 using System;
 using System.Diagnostics;
@@ -37,25 +37,24 @@ public class ScriptInterface
         }));
     }
 
-    public void StartChrome() => RunPs1AndRedirect("chrome");
-    public void StartBrave() => RunPs1AndRedirect("brave");
-    public void StartFirefox() => RunPs1AndRedirect("firefox");
+    public void StartChrome() { RunPs1AndRedirect("chrome"); }
+    public void StartBrave() { RunPs1AndRedirect("brave"); }
+    public void StartFirefox() { RunPs1AndRedirect("firefox"); }
 }
 "@ -ReferencedAssemblies @("System.Windows.Forms", "System.Drawing", "System.Runtime.InteropServices", "System.Net")
 
-# Funkcja do pobierania plików .ps1
+# Pobieranie plików .ps1
 function Download-Ps1File($name) {
     $url = "https://github.com/Relive-Team/relivedebloat/raw/refs/heads/main/Przegladarki/${name}10.ps1"
     $dest = Join-Path $env:TEMP "${name}10.ps1"
     Invoke-WebRequest -Uri $url -OutFile $dest -UseBasicParsing
 }
 
-# Pobierz skrypty .ps1
 Download-Ps1File "chrome"
 Download-Ps1File "brave"
 Download-Ps1File "firefox"
 
-# Tworzenie pełnoekranowego okna
+# Tworzenie formularza
 $form = New-Object Windows.Forms.Form
 $form.Text = "Wybór przeglądarki"
 $form.WindowState = 'Maximized'
@@ -67,11 +66,11 @@ $browser = New-Object Windows.Forms.WebBrowser
 $browser.Dock = 'Fill'
 $browser.ScriptErrorsSuppressed = $true
 
-# Interfejs do komunikacji z HTML
+# Interfejs do komunikacji
 $scriptInterface = New-Object ScriptInterface $env:TEMP, $browser
 $browser.ObjectForScripting = $scriptInterface
 
-# Załaduj stronę wyboru przeglądarki
+# Załaduj stronę
 $browser.Url = "https://relive-team.github.io/relivedebloat/wyborprzegladarki.html"
 
 $form.Controls.Add($browser)
