@@ -16,7 +16,6 @@ if (-not $principal.IsInRole([Security.Principal.WindowsBuiltinRole]::Administra
     exit
 }
 
-[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 

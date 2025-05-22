@@ -18,8 +18,8 @@ public class ScriptInterface
 
 $form = New-Object Windows.Forms.Form
 $form.Text = "Wbudowana przeglądarka"
-$form.Width = 1024
-$form.Height = 768
+$form.WindowState = [System.Windows.Forms.FormWindowState]::Maximized
+$form.FormBorderStyle = [System.Windows.Forms.FormBorderStyle]::None
 
 $browser = New-Object Windows.Forms.WebBrowser
 $browser.Dock = "Fill"
