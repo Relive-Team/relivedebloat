@@ -1,37 +1,78 @@
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-# Dodaj klasę obsługującą zdarzenia z HTML-a
+# Klasa C# poprawiona: bez lambd, z jawnie określonym typem void
 Add-Type -TypeDefinition @"
 using System;
+using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 [ComVisible(true)]
 public class ScriptInterface
 {
-    public void StartChrome()
+    private string tempPath;
+    private WebBrowser browser;
+
+    public ScriptInterface(string tempPath, WebBrowser browser)
     {
-        System.Diagnostics.Process.Start("chrome10.bat");
+        this.tempPath = tempPath;
+        this.browser = browser;
     }
+
+    private void RunPs1AndRedirect(string name)
+    {
+        string path = Path.Combine(tempPath, name + "11.ps1");
+
+        ProcessStartInfo psi = new ProcessStartInfo("powershell.exe");
+        psi.Arguments = "-ExecutionPolicy Bypass -WindowStyle Minimized -File \"" + path + "\"";
+        psi.WindowStyle = ProcessWindowStyle.Minimized;
+        psi.UseShellExecute = false;
+        Process.Start(psi);
+
+        browser.Invoke(new Action(() =>
+        {
+            browser.Url = new Uri("https://relive-team.github.io/relivedebloat/install.html");
+        }));
+    }
+
+    public void StartChrome() { RunPs1AndRedirect("chrome"); }
+    public void StartBrave() { RunPs1AndRedirect("brave"); }
+    public void StartFirefox() { RunPs1AndRedirect("firefox"); }
 }
-"@ -ReferencedAssemblies "System.Runtime.InteropServices"
+"@ -ReferencedAssemblies @("System.Windows.Forms", "System.Drawing", "System.Runtime.InteropServices")
 
+
+# Pobieranie plików .ps1
+function Download-Ps1File($name) {
+    $url = "https://github.com/Relive-Team/relivedebloat/raw/refs/heads/main/Przegladarki/${name}11.ps1"
+    $dest = Join-Path $env:TEMP "${name}11.ps1"
+    Invoke-WebRequest -Uri $url -OutFile $dest -UseBasicParsing
+}
+
+Download-Ps1File "chrome"
+Download-Ps1File "brave"
+Download-Ps1File "firefox"
+
+# Tworzenie formularza
 $form = New-Object Windows.Forms.Form
-$form.Text = "Wbudowana przeglądarka"
-$form.WindowState = [System.Windows.Forms.FormWindowState]::Maximized
-$form.FormBorderStyle = [System.Windows.Forms.FormBorderStyle]::None
+$form.Text = "Wybór przeglądarki"
+$form.WindowState = 'Maximized'
+$form.FormBorderStyle = 'None'
+$form.TopMost = $true
 
+# WebBrowser
 $browser = New-Object Windows.Forms.WebBrowser
-$browser.Dock = "Fill"
+$browser.Dock = 'Fill'
 $browser.ScriptErrorsSuppressed = $true
 
-# Załaduj index.html
-$localHtml = Join-Path $PSScriptRoot "index.html"
-$browser.Url = "http://relive-team.github.io/relivedebloat/wyborprzegladarki.html"
-
-# Przypisz obiekt z metodą do komunikacji z JavaScript
-$scriptInterface = New-Object ScriptInterface
+# Interfejs do komunikacji
+$scriptInterface = New-Object ScriptInterface $env:TEMP, $browser
 $browser.ObjectForScripting = $scriptInterface
+
+# Załaduj stronę
+$browser.Url = "https://relive-team.github.io/relivedebloat/wyborprzegladarki.html"
 
 $form.Controls.Add($browser)
 $form.ShowDialog()
