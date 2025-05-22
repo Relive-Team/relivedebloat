@@ -286,12 +286,15 @@ taskkill /f /im powershell.exe >nul 2>&1
 taskkill /f /im pwsh.exe >nul 2>&1
 taskkill /f /im relivedebloat.exe
 
-echo Pobieranie i uruchamianie skryptu install_finished.ps1...
-powershell -NoProfile -ExecutionPolicy Bypass -Command ^
-    "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/install_finished.ps1' -OutFile '%TEMP%\install_finished.ps1'; ^
-    Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File %TEMP%\install_finished.ps1'"
+@echo off
+echo Pobieranie i uruchamianie skryptu install_finished.vbs...
+
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/install_finished.vbs' -OutFile \"$env:TEMP\install_finished.vbs\""
+
+wscript.exe "%TEMP%\install_finished.vbs"
 
 exit
+
 
 
 
