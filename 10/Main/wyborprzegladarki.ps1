@@ -52,8 +52,15 @@ $firefoxBat = Download-BatFile "firefox"
 # Tworzymy okno
 $form = New-Object Windows.Forms.Form
 $form.Text = "Wbudowana przeglądarka"
-$form.WindowState = [System.Windows.Forms.FormWindowState]::Maximized
 $form.FormBorderStyle = [System.Windows.Forms.FormBorderStyle]::None
+$form.WindowState = [System.Windows.Forms.FormWindowState]::Normal
+
+$screenWidth = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Width
+$screenHeight = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Height
+
+$form.Size = New-Object System.Drawing.Size($screenWidth, $screenHeight)
+$form.Location = New-Object System.Drawing.Point(0, 0)
+$form.TopMost = $true
 
 $browser = New-Object Windows.Forms.WebBrowser
 $browser.Dock = "Fill"
