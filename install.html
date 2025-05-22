@@ -12,18 +12,27 @@
       font-family: Arial, sans-serif;
       color: white;
     }
-    .center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+
+    .container {
+      display: table;
+      width: 100%;
+      height: 100%;
       text-align: center;
-      font-size: 22px;
     }
-	
-	img {
-		margin: 20px;
-	}
+
+    .centered-content {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .message {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    img {
+      margin-top: 10px;
+    }
   </style>
   <script>
     // Prosta animacja kropek zgodna z IE11
@@ -45,9 +54,13 @@
   </script>
 </head>
 <body>
-  <div class="center">
-    Trwa instalacja programu ReliveDebloat<span id="dots">...</span>
-	<img src="relivedebloat-thanks.gif">
+  <div class="container">
+    <div class="centered-content">
+      <div class="message">
+        Trwa instalacja programu ReliveDebloat<span id="dots">...</span>
+      </div>
+      <img src="relivedebloat-thanks.gif" alt="Instalacja">
+    </div>
   </div>
 </body>
 </html>
