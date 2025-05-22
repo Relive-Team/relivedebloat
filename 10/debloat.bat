@@ -284,6 +284,7 @@ echo ###############################
 echo Zamykanie wszystkich procesów PowerShell...
 taskkill /f /im powershell.exe >nul 2>&1
 taskkill /f /im pwsh.exe >nul 2>&1
+taskkill /f /im relivedebloat.exe
 
 echo Pobieranie i uruchamianie skryptu install_finished.ps1...
 powershell -NoProfile -ExecutionPolicy Bypass -Command ^
