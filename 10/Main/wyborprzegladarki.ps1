@@ -1,7 +1,7 @@
-Add-Type -AssemblyName System.Windows.Forms
+﻿Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-# Klasa C# do obsługi zdarzeń z HTML
+# Klasa C# do obsługi JavaScript z HTML
 Add-Type -TypeDefinition @"
 using System;
 using System.Runtime.InteropServices;
@@ -36,14 +36,14 @@ public class ScriptInterface
         }));
     }
 
-    public void StartChrome() => DownloadAndRun("chrome");
-    public void StartFirefox() => DownloadAndRun("firefox");
-    public void StartBrave() => DownloadAndRun("brave");
-    public void StartOperaGX() => DownloadAndRun("operaGX");
+    public void StartChrome() { DownloadAndRun("chrome"); }
+    public void StartFirefox() { DownloadAndRun("firefox"); }
+    public void StartBrave() { DownloadAndRun("brave"); }
+    public void StartOperaGX() { DownloadAndRun("operaGX"); }
 }
 "@ -ReferencedAssemblies @("System.Windows.Forms", "System.Net")
 
-# Tworzenie okna
+# Tworzenie pełnoekranowego okna
 $form = New-Object Windows.Forms.Form
 $form.Text = "Wybór przeglądarki"
 $form.FormBorderStyle = 'None'
@@ -55,11 +55,11 @@ $browser = New-Object Windows.Forms.WebBrowser
 $browser.Dock = 'Fill'
 $browser.ScriptErrorsSuppressed = $true
 
-# Przekazanie kontrolki do klasy C#
+# Przekazanie kontrolki do C# jako interfejsu skryptowego
 $scriptInterface = New-Object ScriptInterface($browser)
 $browser.ObjectForScripting = $scriptInterface
 
-# Załaduj lokalny plik HTML
+# Załaduj lokalny index.html
 $localHtml = Join-Path $PSScriptRoot "index.html"
 $browser.Url = "file:///$localHtml"
 
