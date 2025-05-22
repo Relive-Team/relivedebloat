@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Instalacja</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 20px;
+      background-color: #2c3e50;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    .message {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    img {
+      margin-top: 10px;
+    }
+  </style>
+  <script>
+    // Prosta animacja kropek zgodna z IE11
+    window.onload = function() {
+      var dots = '';
+      var maxDots = 3;
+      var counter = 0;
+      var element = document.getElementById('dots');
+
+      setInterval(function() {
+        counter = (counter + 1) % (maxDots + 1);
+        dots = '';
+        for (var i = 0; i < counter; i++) {
+          dots += '.';
+        }
+        element.innerText = dots;
+      }, 1000);
+    };
+  </script>
+</head>
+<body>
+  <div class="message">
+    Trwa instalacja programu ReliveDebloat<span id="dots">...</span>
+  </div>
+  <img src="relivedebloat-thanks.gif" alt="Instalacja">
+</body>
+</html>
