@@ -234,7 +234,10 @@ reg add "HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys" /v "Flags" /t
 :: Wlaczenie rozszerzen plikow
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d 0 /f
 
-:: Restartowanie Eksploratora Windows, aby zastosowaÄ‡ zmiany
+:: Wylaczenie tzw pogody
+REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v ShellFeedsTaskbarViewMode /t REG_DWORD /d 2 /f
+
+:: Restartowanie Eksploratora Windows, aby zastosować zmiany
 taskkill /f /im explorer.exe
 start explorer.exe
 
@@ -289,7 +292,16 @@ echo #                             #
 echo #   INSTALACJA ZAKONCZONA!    #
 echo #                             #
 echo ###############################
-timeout /t 10 >nul
+@echo off
+echo Zamykanie wszystkich procesów PowerShell...
+taskkill /f /im powershell.exe >nul 2>&1
+taskkill /f /im pwsh.exe >nul 2>&1
+
+echo Pobieranie i uruchamianie skryptu install_finished.ps1...
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+    "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/install_finished.ps1' -OutFile '%TEMP%\install_finished.ps1'; ^
+    Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File %TEMP%\install_finished.ps1'"
+
 exit
 
 
