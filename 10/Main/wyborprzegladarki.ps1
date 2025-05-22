@@ -1,10 +1,13 @@
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
+# Klasa C# do obsługi zdarzeń z HTML
 Add-Type -TypeDefinition @"
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Net;
+using System.IO;
 
 [ComVisible(true)]
 public class ScriptInterface
@@ -16,67 +19,47 @@ public class ScriptInterface
         _browser = browser;
     }
 
-    public void StartChrome()
+    private void DownloadAndRun(string name)
     {
-        string temp = Environment.GetEnvironmentVariable("TEMP");
-        string path = System.IO.Path.Combine(temp, "chrome10.bat");
+        string url = $"https://github.com/Relive-Team/relivedebloat/raw/refs/heads/main/Przegladarki/{name}10.bat";
+        string path = Path.Combine(Path.GetTempPath(), $"{name}10.bat");
+
+        using (WebClient wc = new WebClient())
+        {
+            wc.DownloadFile(url, path);
+        }
+
         System.Diagnostics.Process.Start(path);
+
         _browser.Invoke(new Action(() => {
             _browser.Url = new Uri("https://relive-team.github.io/relivedebloat/install.html");
         }));
     }
 
-    public void StartFirefox()
-    {
-        string temp = Environment.GetEnvironmentVariable("TEMP");
-        string path = System.IO.Path.Combine(temp, "firefox10.bat");
-        System.Diagnostics.Process.Start(path);
-        _browser.Invoke(new Action(() => {
-            _browser.Url = new Uri("https://relive-team.github.io/relivedebloat/install.html");
-        }));
-    }
-
-    public void StartBrave()
-    {
-        string temp = Environment.GetEnvironmentVariable("TEMP");
-        string path = System.IO.Path.Combine(temp, "brave10.bat");
-        System.Diagnostics.Process.Start(path);
-        _browser.Invoke(new Action(() => {
-            _browser.Url = new Uri("https://relive-team.github.io/relivedebloat/install.html");
-        }));
-    }
-
-    public void StartOperaGX()
-    {
-        string temp = Environment.GetEnvironmentVariable("TEMP");
-        string path = System.IO.Path.Combine(temp, "operaGX10.bat");
-        System.Diagnostics.Process.Start(path);
-        _browser.Invoke(new Action(() => {
-            _browser.Url = new Uri("https://relive-team.github.io/relivedebloat/install.html");
-        }));
-    }
+    public void StartChrome() => DownloadAndRun("chrome");
+    public void StartFirefox() => DownloadAndRun("firefox");
+    public void StartBrave() => DownloadAndRun("brave");
+    public void StartOperaGX() => DownloadAndRun("operaGX");
 }
-"@ -ReferencedAssemblies @("System.Runtime.InteropServices", "System.Windows.Forms")
+"@ -ReferencedAssemblies @("System.Windows.Forms", "System.Net")
 
+# Tworzenie okna
 $form = New-Object Windows.Forms.Form
-$form.Text = "Wbudowana przeglądarka"
-$form.FormBorderStyle = [System.Windows.Forms.FormBorderStyle]::None
-$form.WindowState = [System.Windows.Forms.FormWindowState]::Normal
-$screenWidth = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Width
-$screenHeight = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Height
-$form.Size = New-Object System.Drawing.Size($screenWidth, $screenHeight)
-$form.Location = New-Object System.Drawing.Point(0, 0)
+$form.Text = "Wybór przeglądarki"
+$form.FormBorderStyle = 'None'
+$form.WindowState = 'Maximized'
 $form.TopMost = $true
 
+# Kontrolka WebBrowser
 $browser = New-Object Windows.Forms.WebBrowser
-$browser.Dock = "Fill"
+$browser.Dock = 'Fill'
 $browser.ScriptErrorsSuppressed = $true
 
-# Przekazujemy kontrolkę browser do klasy ScriptInterface
+# Przekazanie kontrolki do klasy C#
 $scriptInterface = New-Object ScriptInterface($browser)
 $browser.ObjectForScripting = $scriptInterface
 
-# Ustawiamy lokalny plik HTML
+# Załaduj lokalny plik HTML
 $localHtml = Join-Path $PSScriptRoot "index.html"
 $browser.Url = "file:///$localHtml"
 
