@@ -1,1 +1,1 @@
-MsgBox "Instalacja została zakończona", vbInformation, "Informacja"
+MsgBox "Instalacja zostala zakonczona", vbInformation, "Informacja"
