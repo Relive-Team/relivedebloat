@@ -272,18 +272,6 @@ RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters 1,True
 
 echo Tapeta została pobrana i ustawiona!
 
-:: Pobranie restart.vbs
-set restartVbsPath=%temp%\restart.vbs
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/main/10/restart.vbs' -OutFile '%restartVbsPath%'"
-
-:: Sprawdzenie i uruchomienie restart.vbs
-if exist "%restartVbsPath%" (
-    echo Uruchamianie okna restartu...
-    cscript //nologo "%restartVbsPath%"
-) else (
-    echo Nie udalo sie pobrac restart.vbs – pomijam zapytanie o restart.
-)
-
 :: Komunikat końcowy
 title ReliveDebloat10 - Instalacja zakonczona!
 color 2
