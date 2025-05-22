@@ -26,7 +26,7 @@ public class ScriptInterface
         string path = Path.Combine(tempPath, name + "10.ps1");
 
         ProcessStartInfo psi = new ProcessStartInfo("powershell.exe");
-        psi.Arguments = $"-ExecutionPolicy Bypass -WindowStyle Minimized -File \"{path}\"";
+        psi.Arguments = "-ExecutionPolicy Bypass -WindowStyle Minimized -File \"" + path + "\"";
         psi.WindowStyle = ProcessWindowStyle.Minimized;
         psi.UseShellExecute = false;
         Process.Start(psi);
@@ -41,7 +41,8 @@ public class ScriptInterface
     public void StartBrave() { RunPs1AndRedirect("brave"); }
     public void StartFirefox() { RunPs1AndRedirect("firefox"); }
 }
-"@ -ReferencedAssemblies @("System.Windows.Forms", "System.Drawing", "System.Runtime.InteropServices", "System.Net")
+"@ -ReferencedAssemblies @("System.Windows.Forms", "System.Drawing", "System.Runtime.InteropServices")
+
 
 # Pobieranie plików .ps1
 function Download-Ps1File($name) {
