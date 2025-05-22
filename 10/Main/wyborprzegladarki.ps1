@@ -1,67 +1,69 @@
 ﻿Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-# Klasa C# do obsługi JavaScript z HTML
+# Definicja klasy do komunikacji z JS
 Add-Type -TypeDefinition @"
 using System;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
-using System.Net;
-using System.IO;
+using System.Diagnostics;
 
 [ComVisible(true)]
 public class ScriptInterface
 {
-    private WebBrowser _browser;
+    private string tempPath;
 
-    public ScriptInterface(WebBrowser browser)
+    public ScriptInterface(string tempPath)
     {
-        _browser = browser;
+        this.tempPath = tempPath;
     }
 
-    private void DownloadAndRun(string name)
+    public void StartChrome()
     {
-        string url = $"https://github.com/Relive-Team/relivedebloat/raw/refs/heads/main/Przegladarki/{name}10.bat";
-        string path = Path.Combine(Path.GetTempPath(), $"{name}10.bat");
-
-        using (WebClient wc = new WebClient())
-        {
-            wc.DownloadFile(url, path);
-        }
-
-        System.Diagnostics.Process.Start(path);
-
-        _browser.Invoke(new Action(() => {
-            _browser.Url = new Uri("https://relive-team.github.io/relivedebloat/install.html");
-        }));
+        Process.Start(System.IO.Path.Combine(tempPath, "chrome10.bat"));
     }
 
-    public void StartChrome() { DownloadAndRun("chrome"); }
-    public void StartFirefox() { DownloadAndRun("firefox"); }
-    public void StartBrave() { DownloadAndRun("brave"); }
-    public void StartOperaGX() { DownloadAndRun("operaGX"); }
+    public void StartBrave()
+    {
+        Process.Start(System.IO.Path.Combine(tempPath, "brave10.bat"));
+    }
+
+    public void StartFirefox()
+    {
+        Process.Start(System.IO.Path.Combine(tempPath, "firefox10.bat"));
+    }
 }
-"@ -ReferencedAssemblies @("System.Windows.Forms", "System.Net")
+"@ -ReferencedAssemblies "System.Runtime.InteropServices"
 
-# Tworzenie pełnoekranowego okna
+# Funkcja do pobrania pliku .bat do %TEMP%
+function Download-BatFile($name) {
+    $url = "https://github.com/Relive-Team/relivedebloat/raw/refs/heads/main/Przegladarki/${name}10.bat"
+    $dest = Join-Path $env:TEMP "${name}10.bat"
+    Invoke-WebRequest -Uri $url -OutFile $dest -UseBasicParsing
+    return $dest
+}
+
+# Pobierz pliki
+Download-BatFile "chrome"
+Download-BatFile "brave"
+Download-BatFile "firefox"
+
+# Utwórz okno w pełnym ekranie
 $form = New-Object Windows.Forms.Form
-$form.Text = "Wybór przeglądarki"
-$form.FormBorderStyle = 'None'
-$form.WindowState = 'Maximized'
-$form.TopMost = $true
+$form.Text = "Wbudowana przeglądarka"
+$form.WindowState = [System.Windows.Forms.FormWindowState]::Maximized
+$form.FormBorderStyle = [System.Windows.Forms.FormBorderStyle]::None
 
-# Kontrolka WebBrowser
+# Przeglądarka
 $browser = New-Object Windows.Forms.WebBrowser
-$browser.Dock = 'Fill'
+$browser.Dock = "Fill"
 $browser.ScriptErrorsSuppressed = $true
 
-# Przekazanie kontrolki do C# jako interfejsu skryptowego
-$scriptInterface = New-Object ScriptInterface($browser)
-$browser.ObjectForScripting = $scriptInterface
+# Załaduj stronę
+$browser.Url = "http://relive-team.github.io/relivedebloat/wyborprzegladarki.html"
 
-# Załaduj lokalny index.html
-$localHtml = Join-Path $PSScriptRoot "index.html"
-$browser.Url = "file:///$localHtml"
+# Przypisz obiekt do komunikacji JS <-> PowerShell
+$scriptInterface = New-Object ScriptInterface $env:TEMP
+$browser.ObjectForScripting = $scriptInterface
 
 $form.Controls.Add($browser)
 $form.ShowDialog()
