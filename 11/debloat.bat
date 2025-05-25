@@ -293,7 +293,7 @@ echo Tapeta zostaĹ‚a pobrana i ustawiona!
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/11/Win11Debloat.ps1' -OutFile '%temp%\Win11Debloat.ps1'"
 
 :: Uruchomienie Win11Debloat
-start powershell -NoProfile -ExecutionPolicy Bypass -File "%temp%\Win11Debloat.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File "%temp%\Win11Debloat.ps1"
 exit
 
 
