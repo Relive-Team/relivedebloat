@@ -294,19 +294,6 @@ powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/R
 
 :: Uruchomienie Win11Debloat
 start powershell -NoProfile -ExecutionPolicy Bypass -File "%temp%\Win11Debloat.ps1"
-timeout /t 60 /nobreak
-echo Kontynuowanie po 60 sekundach...
-
-:: Pobieranie programu do zapytania o restart
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/11/restart.vbs' -OutFile '%temp%\restart.vbs'"
-
-echo Zamykanie wszystkich procesów PowerShell...
-taskkill /f /im powershell.exe >nul 2>&1
-taskkill /f /im pwsh.exe >nul 2>&1
-taskkill /f /im relivedebloat.exe
-
-:: Uruchomienie programu do zapytania o restart
-cscript //nologo %temp%\restart.vbs
 exit
 
 
