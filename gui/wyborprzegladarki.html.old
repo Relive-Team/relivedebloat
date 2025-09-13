@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<title>Wybierz przeglądarkę</title>
+<style>
+  body {
+    background-color: #121212;
+    color: #eee;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 20px;
+    text-align: center;
+  }
+  h1 {
+    margin-bottom: 40px;
+  }
+  .browser {
+    display: inline-block;
+    width: 180px;
+    margin: 0 20px 40px 20px;
+    vertical-align: top;
+    cursor: pointer;
+    user-select: none;
+    background: #1f1f1f;
+    padding: 20px 10px 30px 10px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    position: relative;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .browser:hover {
+    background-color: #2c2c2c;
+    box-shadow: 0 0 20px rgba(255,255,255,0.15);
+  }
+  .browser img {
+    width: 150px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  .browser:hover img {
+    border-color: transparent;
+  }
+  .name {
+    margin-top: 15px;
+    font-size: 18px;
+  }
+  .recommendation {
+    margin-top: 8px;
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    display: inline-block;
+  }
+  .recommend {
+    background-color: #198754;
+    color: white;
+  }
+  .not-recommend {
+    background-color: #dc3545;
+    color: white;
+  }
+</style>
+</head>
+<body>
+  <h1>Wybierz przeglądarkę</h1>
+
+  <div class="browser" onclick="window.external.StartFirefox">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/1280px-Firefox_logo%2C_2019.svg.png" alt="Firefox" />
+    <div class="name">Firefox</div>
+    <div class="recommendation recommend">Polecamy</div>
+  </div>
+
+  <div class="browser" onclick="window.external.StartChrome">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/1200px-Google_Chrome_icon_%28February_2022%29.svg.png" alt="Google Chrome" />
+    <div class="name">Google Chrome</div>
+  </div>
+
+  <div class="browser" onclick="window.external.StartBrave">
+    <img src="https://images-eds-ssl.xboxlive.com/image?url=4rt9.lXDC4H_93laV1_eHHFT949fUipzkiFOBH3fAiZZUCdYojwUyX2aTonS1aIwMrx6NUIsHfUHSLzjGJFxxtno4sYKiFW3mdcEL3luHt7MFWoaLvyorESp56jOGqLkFQDP.hK1wMrAlVv0ChkA0MJ2Vv80TFdtpGcaUgLAFQU-&format=source" alt="Brave" />
+    <div class="name">Brave</div>
+  </div>
+
+  <div class="browser" onclick="window.external.StartOperaGX">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Opera_GX_Icon.svg/1200px-Opera_GX_Icon.svg.png" alt="Opera GX" />
+    <div class="name">Opera GX</div>
+    <div class="recommendation not-recommend">Nie polecamy</div>
+  </div>
+
+  <script>
+    function tryCall(method) {
+      try {
+        if(window.external && typeof window.external[method] === 'function') {
+          window.external[method]();
+        } else {
+          alert("Nie można uruchomić przeglądarki z tego miejsca.");
+        }
+      } catch(e) {
+        alert("Błąd przy uruchamianiu: " + e.message);
+      }
+    }
+  </script>
+</body>
+</html>
