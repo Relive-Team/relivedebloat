@@ -40,6 +40,14 @@ public class ScriptInterface
     public void StartChrome() { RunPs1AndRedirect("chrome"); }
     public void StartBrave() { RunPs1AndRedirect("brave"); }
     public void StartFirefox() { RunPs1AndRedirect("firefox"); }
+
+    public void SkipBrowser()
+    {
+        browser.Invoke(new Action(() =>
+        {
+            browser.Url = new Uri("https://relive-team.github.io/relivedebloat/install.html");
+        }));
+    }
 }
 "@ -ReferencedAssemblies @("System.Windows.Forms", "System.Drawing", "System.Runtime.InteropServices")
 
