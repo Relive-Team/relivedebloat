@@ -289,12 +289,19 @@ RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters 1,True
 
 echo Tapeta zostaĹ‚a pobrana i ustawiona!
 
+:: Naprawienie kalendarza
+reg add "HKLM\Software\Policies\Microsoft\Windows\Explorer" /v DisableNotificationCenter /t REG_DWORD /d 0 /f
+echo Naprawienie kalendarza
+pause
+
+
 :: Pobieranie Win11Debloat
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/11/Win11Debloat.ps1' -OutFile '%temp%\Win11Debloat.ps1'"
 
 :: Uruchomienie Win11Debloat
 powershell -NoProfile -ExecutionPolicy Bypass -File "%temp%\Win11Debloat.ps1"
 exit
+
 
 
 
