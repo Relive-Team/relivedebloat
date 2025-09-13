@@ -1,7 +1,5 @@
 # Relive Debloat
-<center>
-  ![Downloads](https://img.shields.io/github/downloads/Relive-Team/relivedebloat/total.svg)
-</center>
+![Downloads](https://img.shields.io/github/downloads/Relive-Team/relivedebloat/total.svg)
 Relive Debloat to narzędzie przeznaczone do usuwania zbędnych aplikacji i funkcji z systemu Windows 11 i 10,
 co pozwala na poprawę wydajności i zmniejszenie obciążenia systemu. Program umożliwia m.in., usuwanie
 preinstalowanych aplikacji, wyłączenie telemetrii oraz dostosowywanie interfejsu użytkownika. Dzięki temu
