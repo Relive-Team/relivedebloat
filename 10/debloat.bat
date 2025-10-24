@@ -141,11 +141,8 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Application
 echo Zmiany w rejestrze zostaly zastosowane!
 
 
-:: Pobieranie Edge Remover
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/10/Remove-NoTerm.exe' -OutFile '%temp%\Remove-NoTerm.exe'"
-
 :: Uruchamianie Edge Remover
-start "" "%temp%\Remove-NoTerm.exe"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "RemoveEdge.ps1" -UninstallEdge -NonInteractive
 
 :: Pozbycie siÄ™ procesow OneDrive
 taskkill /f /im OneDrive.exe
@@ -157,30 +154,6 @@ taskkill /f /im OneDrive.exe
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d 0 /f
 
 echo Zmiana w rejestrze zostala zastosowana!
-
-:: Wylaczenie DragFullWindows
-reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v "DragFullWindows" /t REG_SZ /d 0 /f
-
-:: Ustawienie MenuShowDelay
-reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v "MenuShowDelay" /t REG_SZ /d 200 /f
-
-:: Wylaczenie MinAnimate
-reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v "MinAnimate" /t REG_SZ /d 0 /f
-
-:: Ustawienie KeyboardDelay
-reg add "HKEY_CURRENT_USER\Control Panel\Keyboard" /v "KeyboardDelay" /t REG_DWORD /d 0 /f
-
-:: Wylaczenie ListviewAlphaSelect
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ListviewAlphaSelect" /t REG_DWORD /d 0 /f
-
-:: Wylaczenie ListviewShadow
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ListviewShadow" /t REG_DWORD /d 0 /f
-
-:: Wylaczenie TaskbarAnimations
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAnimations" /t REG_DWORD /d 0 /f
-
-:: Ustawienie VisualFXSetting
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v "VisualFXSetting" /t REG_DWORD /d 3 /f
 
 :: Wylaczenie EnableAeroPeek
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM" /v "EnableAeroPeek" /t REG_DWORD /d 0 /f
@@ -221,10 +194,6 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Pers
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" /v "CortanaConsent" /t REG_DWORD /d 0 /f
 
-:: tutaj wkrĂłtce bÄ™dzie odpinanie rzeczy z menu start
-powershell -NoProfile -ExecutionPolicy Bypass -Command "Get-StartApps | ForEach-Object { Remove-StartMenuApp -Name $_.Name }"
-echo Wszystkie przypiÄ™te aplikacje w menu Start zostaĹ‚y usuniÄ™te (jeĹ›li to moĹĽliwe).
-
 :: Wylaczenie Snap Assist Suggestions
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "SnapAssist" /t REG_DWORD /d 0 /f
 
@@ -254,43 +223,9 @@ REG DELETE HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband /F
 taskkill /f /im explorer.exe
 start explorer.exe
 
-:: Pobieranie tapety
-set wallpaperUrl=https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/Tapety/tapeta.bmp
-set wallpaperPath=%temp%\tapeta.bmp
-
-powershell -Command "Invoke-WebRequest -Uri '%wallpaperUrl%' -OutFile '%wallpaperPath%'"
-
-:: Ustawienie pobranej tapety jako tla pulpitu
-reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "%wallpaperPath%" /f
-
-:: Ustawienie stylu tla (dopasowanie do ekranu)
-reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v WallpaperStyle /t REG_SZ /d 10 /f
-reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v TileWallpaper /t REG_SZ /d 0 /f
-
-:: OdĹ›wieĹĽenie ustawien pulpitu
-RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters 1,True
-
-echo Tapeta została pobrana i ustawiona!
-
-:: Komunikat końcowy
-title ReliveDebloat10 - Instalacja zakonczona!
-color 2
-echo ###############################
-echo #                             #
-echo #   INSTALACJA ZAKONCZONA!    #
-echo #                             #
-echo ###############################
 echo Zamykanie wszystkich procesów PowerShell...
 taskkill /f /im powershell.exe >nul 2>&1
 taskkill /f /im pwsh.exe >nul 2>&1
-taskkill /f /im relivedebloat.exe
-
-echo Pobieranie i uruchamianie skryptu install_finished.vbs...
-
-powershell -NoProfile -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/install_finished.vbs' -OutFile \"$env:TEMP\install_finished.vbs\""
-
-wscript.exe "%TEMP%\install_finished.vbs"
-
 exit
 
 

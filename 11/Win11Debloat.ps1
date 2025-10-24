@@ -1,35 +1,135 @@
-& ([scriptblock]::Create((irm "https://debloat.raphi.re/"))) -RunDefaults -Silent
+param (
+    [switch]$Silent,
+    [switch]$Verbose,
+    [switch]$Sysprep,
+    [string]$LogPath,
+    [string]$User,
+    [switch]$CreateRestorePoint,
+    [switch]$RunAppsListGenerator, [switch]$RunAppConfigurator,
+    [switch]$RunDefaults,
+    [switch]$RunDefaultsLite,
+    [switch]$RunSavedSettings,
+    [switch]$RemoveApps, 
+    [switch]$RemoveAppsCustom,
+    [switch]$RemoveGamingApps,
+    [switch]$RemoveCommApps,
+    [switch]$RemoveHPApps,
+    [switch]$RemoveW11Outlook,
+    [switch]$ForceRemoveEdge,
+    [switch]$DisableDVR,
+    [switch]$DisableTelemetry,
+    [switch]$DisableFastStartup,
+    [switch]$DisableModernStandbyNetworking,
+    [switch]$DisableBingSearches, [switch]$DisableBing,
+    [switch]$DisableDesktopSpotlight,
+    [switch]$DisableLockscrTips, [switch]$DisableLockscreenTips,
+    [switch]$DisableWindowsSuggestions, [switch]$DisableSuggestions,
+    [switch]$DisableEdgeAds,
+    [switch]$DisableSettings365Ads,
+    [switch]$DisableSettingsHome,
+    [switch]$ShowHiddenFolders,
+    [switch]$ShowKnownFileExt,
+    [switch]$HideDupliDrive,
+    [switch]$EnableDarkMode,
+    [switch]$DisableTransparency,
+    [switch]$DisableAnimations,
+    [switch]$TaskbarAlignLeft,
+    [switch]$CombineTaskbarAlways, [switch]$CombineTaskbarWhenFull, [switch]$CombineTaskbarNever,
+    [switch]$CombineMMTaskbarAlways, [switch]$CombineMMTaskbarWhenFull, [switch]$CombineMMTaskbarNever,
+    [switch]$MMTaskbarModeAll, [switch]$MMTaskbarModeMainActive, [switch]$MMTaskbarModeActive,
+    [switch]$HideSearchTb, [switch]$ShowSearchIconTb, [switch]$ShowSearchLabelTb, [switch]$ShowSearchBoxTb,
+    [switch]$HideTaskview,
+    [switch]$DisableStartRecommended,
+    [switch]$DisableStartPhoneLink,
+    [switch]$DisableCopilot,
+    [switch]$DisableRecall,
+    [switch]$DisableClickToDo,
+    [switch]$DisablePaintAI,
+    [switch]$DisableNotepadAI,
+    [switch]$DisableEdgeAI,
+    [switch]$DisableWidgets, [switch]$HideWidgets,
+    [switch]$DisableChat, [switch]$HideChat,
+    [switch]$EnableEndTask,
+    [switch]$EnableLastActiveClick,
+    [switch]$ClearStart,
+    [string]$ReplaceStart,
+    [switch]$ClearStartAllUsers,
+    [string]$ReplaceStartAllUsers,
+    [switch]$RevertContextMenu,
+    [switch]$DisableMouseAcceleration,
+    [switch]$DisableStickyKeys,
+    [switch]$HideHome,
+    [switch]$HideGallery,
+    [switch]$ExplorerToHome,
+    [switch]$ExplorerToThisPC,
+    [switch]$ExplorerToDownloads,
+    [switch]$ExplorerToOneDrive,
+    [switch]$DisableOnedrive, [switch]$HideOnedrive,
+    [switch]$Disable3dObjects, [switch]$Hide3dObjects,
+    [switch]$DisableMusic, [switch]$HideMusic,
+    [switch]$DisableIncludeInLibrary, [switch]$HideIncludeInLibrary,
+    [switch]$DisableGiveAccessTo, [switch]$HideGiveAccessTo,
+    [switch]$DisableShare, [switch]$HideShare
+)
 
-# Zamykanie procesów związanych z PowerShell i relivedebloat
-# Ścieżka do pliku VBS
-$vbscriptPath = "$env:TEMP\restart_system.vbs"
+# Show error if current powershell environment does not have LanguageMode set to FullLanguage 
+if ($ExecutionContext.SessionState.LanguageMode -ne "FullLanguage") {
+   Write-Host "Error: Win11Debloat is unable to run on your system. PowerShell execution is restricted by security policies" -ForegroundColor Red
+   Write-Output ""
+   Write-Output "Press enter to exit..."
+   Read-Host | Out-Null
+   Exit
+}
 
-# Treść skryptu VBS
-$vbscriptContent = @"
-Dim response
-response = MsgBox("Instalacja zostala zakonczona. Czy restartowac system? (zalecane)", vbYesNo + vbQuestion, "Restart systemu")
+Clear-Host
+Write-Output "-------------------------------------------------------------------------------------------"
+Write-Output " Win11Debloat Script - Get"
+Write-Output "-------------------------------------------------------------------------------------------"
 
-If response = vbYes Then
-    Set objShell = CreateObject("WScript.Shell")
-    objShell.Run "shutdown.exe -r -t 0", 0, True
-End If
-"@
+# Remove old script folder if it exists, except for CustomAppsList and SavedSettings files
+if (Test-Path "$env:TEMP/Win11Debloat") {
+    Write-Output ""
+    Write-Output "> Cleaning up old Win11Debloat folder..."
+    Get-ChildItem -Path "$env:TEMP/Win11Debloat" -Exclude CustomAppsList,SavedSettings,Win11Debloat.log | Remove-Item -Recurse -Force
+}
 
-# Zapisanie pliku VBS
-Set-Content -Path $vbscriptPath -Value $vbscriptContent -Encoding ASCII
+Write-Output ""
+Write-Output "> Unpacking..."
 
-# Uruchomienie skryptu
-Start-Process "wscript.exe" -ArgumentList "`"$vbscriptPath`""
+# Unzip archive to Win11Debloat folder
+Expand-Archive "$env:win11debloat.zip" "$env:TEMP/Win11Debloat"
 
-Stop-Process -Name "powershell" -Force -ErrorAction SilentlyContinue
-Stop-Process -Name "pwsh" -Force -ErrorAction SilentlyContinue
-Stop-Process -Name "relivedebloat" -Force -ErrorAction SilentlyContinue
+# Move files
+Get-ChildItem -Path "$env:TEMP/Win11Debloat/Raphire-Win11Debloat-*" -Recurse | Move-Item -Destination "$env:TEMP/Win11Debloat"
 
-Write-Output "Pobieranie i uruchamianie skryptu install_finished.vbs..."
+# Make list of arguments to pass on to the script
+$arguments = $($PSBoundParameters.GetEnumerator() | ForEach-Object {
+    if ($_.Value -eq $true) {
+        "-$($_.Key)"
+    } 
+    else {
+         "-$($_.Key) ""$($_.Value)"""
+    }
+})
 
-# Pobieranie skryptu install_finished.vbs
-$installPath = "$env:TEMP\install_finished.vbs"
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/install_finished.vbs" -OutFile $installPath
+Write-Output ""
+Write-Output "> Running Win11Debloat..."
 
-# Uruchomienie skryptu VBS
-Start-Process "wscript.exe" -ArgumentList "`"$installPath`"" -Wait
+# Run Win11Debloat script with the provided arguments
+$debloatProcess = Start-Process powershell.exe -PassThru -ArgumentList "-executionpolicy bypass -File $env:TEMP\Win11Debloat\Win11Debloat.ps1 $arguments" -Verb RunAs
+
+# Wait for the process to finish before continuing
+if ($null -ne $debloatProcess) {
+    $debloatProcess.WaitForExit()
+}
+
+# Remove all remaining script files, except for CustomAppsList and SavedSettings files
+if (Test-Path "$env:TEMP/Win11Debloat") {
+    Write-Output ""
+    Write-Output "> Cleaning up..."
+
+    # Cleanup, remove Win11Debloat directory
+    Get-ChildItem -Path "$env:TEMP/Win11Debloat" -Exclude CustomAppsList,SavedSettings,Win11Debloat.log | Remove-Item -Recurse -Force
+}
+
+Write-Output ""

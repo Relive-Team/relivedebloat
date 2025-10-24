@@ -140,12 +140,8 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Application
 
 echo Zmiany w rejestrze zostaly zastosowane!
 
-
-:: Pobieranie Edge Remover
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/11/Remove-NoTerm.exe' -OutFile '%temp%\Remove-NoTerm.exe'"
-
 :: Uruchamianie Edge Remover
-start "" "%temp%\Remove-NoTerm.exe"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "RemoveEdge.ps1" -UninstallEdge -NonInteractive
 
 :: Pozbycie siÄ™ procesow OneDrive
 taskkill /f /im OneDrive.exe
@@ -271,33 +267,12 @@ REG DELETE HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband /F
 taskkill /f /im explorer.exe
 start explorer.exe
 
-:: Pobieranie tapety
-set wallpaperUrl=https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/Tapety/tapeta.bmp
-set wallpaperPath=%temp%\tapeta.bmp
-
-powershell -Command "Invoke-WebRequest -Uri '%wallpaperUrl%' -OutFile '%wallpaperPath%'"
-
-:: Ustawienie pobranej tapety jako tla pulpitu
-reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "%wallpaperPath%" /f
-
-:: Ustawienie stylu tla (dopasowanie do ekranu)
-reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v WallpaperStyle /t REG_SZ /d 10 /f
-reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v TileWallpaper /t REG_SZ /d 0 /f
-
-:: OdĹ›wieĹĽenie ustawien pulpitu
-RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters 1,True
-
-echo Tapeta zostaĹ‚a pobrana i ustawiona!
-
 :: Naprawienie kalendarza
 reg add "HKLM\Software\Policies\Microsoft\Windows\Explorer" /v DisableNotificationCenter /t REG_DWORD /d 0 /f
 echo Naprawienie kalendarza
 
-:: Pobieranie Win11Debloat
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Relive-Team/relivedebloat/refs/heads/main/11/Win11Debloat.ps1' -OutFile '%temp%\Win11Debloat.ps1'"
-
 :: Uruchomienie Win11Debloat
-powershell -NoProfile -ExecutionPolicy Bypass -File "%temp%\Win11Debloat.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File "Win11Debloat.ps1"
 exit
 
 
